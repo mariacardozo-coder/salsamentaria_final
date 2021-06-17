@@ -1,34 +1,40 @@
 package dominio;
 
+import java.io.InputStream;
+
 public class Producto {
 
     int idProducto;
     String nombres;
+    InputStream foto;
+    String descripcion;
     double precio;
     int stock;
-    String estado;
+
 
 
     public Producto() {
-    }
-
-    public Producto(int idProducto, String nombres, double precio, int stock, String estado) {
-        this.idProducto = idProducto;
-        this.nombres = nombres;
-        this.precio = precio;
-        this.stock = stock;
-        this.estado = estado;
     }
 
     public Producto(int idProducto) {
         this.idProducto = idProducto;
     }
 
-    public Producto(String nombres, double precio, int stock, String estado) {
+    public Producto(int idProducto, String nombres, InputStream foto, String descripcion, double precio, int stock) {
+        this.idProducto = idProducto;
         this.nombres = nombres;
+        this.foto = foto;
+        this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.estado = estado;
+    }
+
+    public Producto(String nombres, InputStream foto, String descripcion, double precio, int stock) {
+        this.nombres = nombres;
+        this.foto = foto;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.stock = stock;
     }
 
     public int getIdProducto() {
@@ -47,6 +53,22 @@ public class Producto {
         this.nombres = nombres;
     }
 
+    public InputStream getFoto() {
+        return foto;
+    }
+
+    public void setFoto(InputStream foto) {
+        this.foto = foto;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public double getPrecio() {
         return precio;
     }
@@ -63,22 +85,5 @@ public class Producto {
         this.stock = stock;
     }
 
-    public String getEstado() {
-        return estado;
-    }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "idProducto=" + idProducto +
-                ", nombres='" + nombres + '\'' +
-                ", precio=" + precio +
-                ", stock='" + stock + '\'' +
-                ", estado='" + estado + '\'' +
-                '}';
-    }
 }
