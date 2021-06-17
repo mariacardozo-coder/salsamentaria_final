@@ -52,7 +52,7 @@
         <c:forEach var="producto" items="${productos}">
             <div class="col-sm-4">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" align="center">
                         <label>${producto.getNombres()}</label>
                     </div>
                     <div class="card-body">
