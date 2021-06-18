@@ -17,12 +17,16 @@ public class ServletProducto extends HttpServlet {
         String accion = request.getParameter("accion");
 
         if (accion != null) {
-            switch ("listar") {
+            switch (accion) {
                 case "listar":
                     this.listarProducto(request, response);
                     break;
+                default:
+                    this.listarProducto(request, response);
             }
 
+        } else {
+            this.listarProducto(request, response);
         }
 
     }
@@ -33,10 +37,10 @@ public class ServletProducto extends HttpServlet {
     }
 
 
-public void listarProducto(HttpServletRequest request, HttpServletResponse response)throws IOException{
-    List productos = new ProductoDaoJdbc().Listar();
-    HttpSession session = request.getSession();
-    session.setAttribute("productos", productos);
-    response.sendRedirect("productos.jsp");
-}
+    public void listarProducto(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List productos = new ProductoDaoJdbc().Listar();
+        HttpSession session = request.getSession();
+        session.setAttribute("productos", productos);
+        response.sendRedirect("productos.jsp");
+    }
 }

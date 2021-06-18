@@ -9,7 +9,6 @@
     <script src="https://kit.fontawesome.com/f90d3bf50d.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">La Zipaquireña</a>
@@ -25,9 +24,9 @@
                     <a class="nav-link" href="#">Ofertas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/ServletCarrito?accion=Carrito"> <i class="fas fa-cart-plus">(<label style="color: darkorange">${contador}</label>)</i>Carrito</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/ServletProducto?accion=listar"> Seguir
+                        Comprando</a>
                 </li>
-                <li><a>${contador}</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,32 +47,65 @@
         </div>
     </div>
 </nav>
-<div class="container mt-2">
+
+<div class="container mt-4">
+    <h1>Carro</h1>
     <div class="row">
-        <c:forEach var="producto" items="${productos}">
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-header" align="center">
-                        <label>${producto.getNombres()}</label>
-                    </div>
-                    <div class="card-body">
-                        <i>${producto.getPrecio()}</i>
-                        <img src="${pageContext.request.contextPath}/ServletIMG?id=${producto.getIdProducto()}" width="200" height="180">
-                    </div>
-                    <div class="card-footer text-center">
-                        <label>${producto.getDescripcion()}</label>
-                        <div>
-                            <a class="btn btn-outline-info" href="${pageContext.request.contextPath}/ServletCarrito?accion=AgregarCarrito&id=${producto.getIdProducto()}">Agregar a carrito</a>
-                            <a class="btn btn-danger" href="${pageContext.request.contextPath}/ServletCarrito?accion=Comprar&id=${producto.getIdProducto()}">Comprar</a>
-                        </div>
-                    </div>
+
+        <div class="col-sm-8">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>item</th>
+                    <th>Nombres</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Cant</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="producto" items="${carrito}">
+                    <tr>
+                        <td>${producto.getItem()}</td>
+                        <td>${producto.getNombres()}</td>
+                        <td>${producto.getDescripcion()}
+                        <img src="${pageContext.request.contextPath}/ServletIMG?id=${producto.getIdProducto()}" width="100" height="100"></td>
+                        <td>${producto.getPrecioCompra()}</td>
+                        <td>${producto.getCantidad()}</td>
+                        <td>${producto.getSubTotal()}</td>
+                        <td>
+                            <a class="btn btn-danger" href="${pageContext.request.contextPath}/ServletCarrito?accion=Delete&idp=${producto.getIdProducto()}">Eliminar</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Generar Compra</h3>
+                </div>
+                <div class="card-body">
+                    <label>SubTotal</label>
+                    <input type="text" value="${totalPagar}" readonly="" class="form-control">
+                    <label>Descuento</label>
+                    <input type="text" readonly="" class="form-control">
+                    <label>Total a Pagar</label>
+                    <input type="text" value="${totalPagar}" readonly="" class="form-control">
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-info btn-block">Realizar Pago</a>
+                    <a href="#" class="btn btn-danger btn-block">Generar Compra</a>
                 </div>
             </div>
-        </c:forEach>
+        </div>
     </div>
 </div>
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -83,5 +115,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/funciones.js" type="text/javascript"></script>
 </body>
 </html>
